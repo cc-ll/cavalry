@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# Settings
+PORT=3000
+TIMEOUT=2000
+NODES=6
+#HOST=$(ifconfig|grep "inet addr:"|grep -v "127.0.0.1"|cut -d: -f2|awk '{print $1}')
+HOST=0.0.0.0 
+
+REDIS_SERVER=redis-server
+REDIS_CLI=redis-cli
+NUTCRACKER=nutcracker
+NUTCRACKER_CONFIG=nutcracker.yml
+
+# Computed vars
+ENDPORT=$((PORT+NODES))
+
+nutcracker_config()
+{
+    cat > $NUTCRACKER_CONFIG <<EOF
+twemproxy-redis-9999:
+  auto_eject_hosts: true
+  distribution: ketama
+  hash: fnv1a_64
+  listen: 0.0.0.0:9999
+# timeout: 10
+  redis: true
+  preconnect: true
+  server_connections: 10000
+  server_failure_limit: 1
+  server_retry_timeout: 30000
+  servers:
+EOF
+}
+
+if [ "$1" == "start" ]
+then
+#    cat > $NUTCRACKER_CONFIG <<EOF
+#twemproxy-redis-9999:
+#  auto_eject_hosts: true
+#  distribution: ketama
+#  hash: fnv1a_64
+#  listen: 0.0.0.0:9999
+## timeout: 10
+#  redis: true
+#  preconnect: true
+#  server_connections: 10000
+#  server_failure_limit: 1
+#  server_retry_timeout: 30000
+#  servers:
+#EOF
+    nutcracker_config
+    while [ $((PORT < ENDPORT)) != "0" ]; do
+        PORT=$((PORT+1))
+        echo "Starting $PORT"
+        $REDIS_SERVER --bind $HOST --port $PORT --dbfilename dump-${PORT}.rdb --logfile ${PORT}.log --daemonize yes
+        echo "  - $HOST:$PORT:1" >> $NUTCRACKER_CONFIG
+    done
+    $NUTCRACKER -c nutcracker.yml -o nutcracker.log -p nutcracker.pid --stats-port=10999 -v 5 -d
+    exit 0
+fi
+
+if [ "$1" == "stop" ]
+then
+    kill -9 $(cat nutcracker.pid)
+    while [ $((PORT < ENDPORT)) != "0" ]; do
+        PORT=$((PORT+1))
+        echo "Stopping $PORT"
+        $REDIS_CLI -h $HOST -p $PORT shutdown nosave
+    done
+    exit 0
+fi
+
+if [ "$1" == "clean" ]
+then
+    rm -rf *.log
+    rm -rf dump*.rdb
+    rm -rf *.pid
+    exit 0
+fi
+
+if [ "$1" == "test" ]
+then
+    cat <<EOF
+---------
+---------
+---------
+EOF
+    exit 0
+fi
+
+echo "Usage: $0 [start|create|stop|watch|tail|clean]"
+echo "start       -- Launch Redis Cluster instances."
+echo "stop        -- Stop Redis Cluster instances."
+echo "clean       -- Remove all instances data, logs, configs."
