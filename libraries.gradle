@@ -36,6 +36,7 @@ ext {
 	mysqlDriverVersion						= '5.1.31'
 	reactorVersion							= '1.1.2.RELEASE'
 	jedisVersion							= '2.7.2'
+	javatuplesVersion						= '1.2'
 
     libraries = [
 
@@ -48,48 +49,34 @@ ext {
 			spring_jdbc:			   	"org.springframework:spring-jdbc:${springFrameworkVersion}",
 			//spring core
 			spring_core:				"org.springframework:spring-core:${springFrameworkVersion}",
-            
             //spring_data_jpa
             spring_data_jpa:		   	"org.springframework.data:spring-data-jpa:${springDataJpaVersion}",
-            
-            reactor_core:				"org.projectreactor:reactor-core:${springFrameworkVersion}",
-            
+			reactor_core:				"org.projectreactor:reactor-core:${springFrameworkVersion}",
             spring_test:				"org.springframework:spring-test:${springFrameworkVersion}",
-            
             reactor_spring_context:		"org.projectreactor.spring:reactor-spring-context:${reactorVersion}",
-            
             slf4j_api:					"org.slf4j:slf4j-api:${slf4jVersion}",
             logback_classic:			"ch.qos.logback:logback-classic:${logbackVersion}",
-
 			lombok:						"org.projectlombok:lombok:${lombokVersion}",
-			
 			orika_core:					"ma.glasnost.orika:orika-core:${orikaVersion}",
 			orika_eclipse_tools:		"ma.glasnost.orika:orika-eclipse-tools:${orikaVersion}",
-			
 			servlet_api:				"javax.servlet:javax.servlet-api:${servletApiVersion}",
 			jsp_api:					"javax.servlet.jsp:javax.servlet.jsp-api:${jspApiVersion}",
 			el_api:						"javax.el:javax.el-api:${elApiVersion}",
 			jstl_api:					"javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:${jstlApiVersion}",
-			
 			// httpclient
 			httpasyncclient:			"org.apache.httpcomponents:httpasyncclient:${httpcomponentsVersion}",
 			httpclient: 				"org.apache.httpcomponents:fluent-hc:${httpclientVersion}",
-			
 			//json
 			jackson:					"org.codehaus.jackson:jackson-mapper-asl:${jackson2Version}",
-			
 			//unit test
-			spring_test:			   	"org.springframework:spring-test:${springFrameworkVersion}",
 			junit:						"junit:junit:${junitVersion}",
 			mockito_all:				"org.mockito:mockito-all:${mockitoVerion}",
 			hamcrest_all:				"org.hamcrest:hamcrest-all:${hamcrestVersion}",
 			assertJ:					"org.assertj:assertj-core:${assertJVersion}",
-			
 			//mybatis
 			mybatis:					"org.mybatis:mybatis:${mybatisVersion}",
 			mybatis_spring:				"org.mybatis:mybatis-spring:${mybatisSpringVersion}",
 			mybatis_generator:			"org.mybatis.generator:mybatis-generator-core:${mybatisGeneratorVersion}",
-			
 			//apache commons
 			commons_lang3:				"org.apache.commons:commons-lang3:${commonsLang3Version}",
 			commons_collections4:		"org.apache.commons:commons-collections4:${commonsCollections4Version}",
@@ -98,18 +85,15 @@ ext {
 			commons_compress:			"org.apache.commons:commons-compress:${commonsCompressVersion}",
 			commons_fileupload:			"commons-fileupload:commons-fileupload:${commonsFileuploadVersion}",
 			commons_io:					"org.apache.commons:commons-io:${commonsIoVersion}",
-
 			//guava
 			guava:						"com.google.guava:guava:${guavaVersion}",
-			
 			//c3p0
 			c3p0:						"com.mchange:c3p0:${c3p0Version}",
-			
 			//mysql
 			mysql:						"mysql:mysql-connector-java:${mysqlDriverVersion}",
-
 			//jedis
-			jedis:						"redis.clients:jedis:${jedisVersion}"
+			jedis:						"redis.clients:jedis:${jedisVersion}",
+			//tuple
+			javatuples:					"org.javatuples:javatuples:${javatuplesVersion}"
         ]
-    
 }

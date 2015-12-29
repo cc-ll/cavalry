@@ -59,6 +59,7 @@ dependencies {
     compile(libraries.jedis)
     compile(libraries.lombok)
     compile(libraries.orika_core)
+    compile(libraries.javatuples)
     testCompile(libraries.junit)
     testCompile(libraries.spring_test)
     testCompile(libraries.assertJ)
