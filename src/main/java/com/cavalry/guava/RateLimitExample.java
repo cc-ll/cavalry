@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * author: master
  * date: 2015/12/29
  */
-public class RateLimit {
+public class RateLimitExample {
 
     private RateLimiter rateLimiter = RateLimiter.create(1024);
 

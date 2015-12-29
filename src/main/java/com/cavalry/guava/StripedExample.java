@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Lock;
  * author: master
  * date: 2015/12/29
  */
-public class StripedLock {
+public class StripedExample {
 
     private Striped<Lock> striped = Striped.lazyWeakLock(10);
 
