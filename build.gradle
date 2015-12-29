@@ -57,6 +57,8 @@ dependencies {
     compile(libraries.mybatis_generator)
     compile(libraries.mysql)
     compile(libraries.jedis)
+    compile(libraries.lombok)
+    compile(libraries.orika_core)
     testCompile(libraries.junit)
     testCompile(libraries.spring_test)
     testCompile(libraries.assertJ)
