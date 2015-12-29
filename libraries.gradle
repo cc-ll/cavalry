@@ -37,6 +37,7 @@ ext {
 	reactorVersion							= '1.1.2.RELEASE'
 	jedisVersion							= '2.7.2'
 	javatuplesVersion						= '1.2'
+	joda_timeVersion						= '2.9.1'
 
     libraries = [
 
@@ -85,15 +86,11 @@ ext {
 			commons_compress:			"org.apache.commons:commons-compress:${commonsCompressVersion}",
 			commons_fileupload:			"commons-fileupload:commons-fileupload:${commonsFileuploadVersion}",
 			commons_io:					"org.apache.commons:commons-io:${commonsIoVersion}",
-			//guava
 			guava:						"com.google.guava:guava:${guavaVersion}",
-			//c3p0
 			c3p0:						"com.mchange:c3p0:${c3p0Version}",
-			//mysql
 			mysql:						"mysql:mysql-connector-java:${mysqlDriverVersion}",
-			//jedis
 			jedis:						"redis.clients:jedis:${jedisVersion}",
-			//tuple
-			javatuples:					"org.javatuples:javatuples:${javatuplesVersion}"
+			javatuples:					"org.javatuples:javatuples:${javatuplesVersion}",
+			joda_time:					"joda-time:joda-time:${joda_timeVersion}"
         ]
 }
